@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import MoneyBar from "@/components/MoneyBar";
+import Products from "@/components/Products";
 
 const App = () => {
   return (
@@ -8,6 +9,7 @@ const App = () => {
         <div className="flex flex-col gap-4">
           <Header />
           <MoneyBar />
+          <Products />
         </div>
       </div>
     </div>
