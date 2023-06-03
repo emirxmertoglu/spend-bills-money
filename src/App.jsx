@@ -4,7 +4,7 @@ import Products from "@/components/Products";
 
 const App = () => {
   return (
-    <div className="p-4 lg:p-8 h-full bg-gray-100">
+    <div className="p-4 lg:p-8">
       <div className="container max-w-[1000px] mx-auto">
         <div className="flex flex-col gap-4">
           <Header />
