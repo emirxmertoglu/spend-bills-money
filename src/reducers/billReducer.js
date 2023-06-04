@@ -23,7 +23,7 @@ export const billSlice = createSlice({
         item.quantity = action.payload.quantity;
         item.price = action.payload.price;
       } else {
-        state.bill.push({ ...action.payload });
+        state.bill.push(action.payload);
       }
       state.totalPrice = getTotalPrice(state.bill);
     },

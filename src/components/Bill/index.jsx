@@ -12,19 +12,23 @@ const Bill = () => {
         <table className="table-auto lg:w-1/2 mt-8">
           <tbody>
             {bill.map((item) => (
-              <tr key={item.id}>
-                <td>{item.name}</td>
-                <td>x{item.quantity}</td>
-                <td>{USDollar.format(item.price)}</td>
+              <tr key={item.id} className="border-b py-2">
+                <td className="py-2">{item.title}</td>
+                <td className="py-2 px-4">x{item.quantity}</td>
+                <td className="py-2 font-semibold text-green-500">
+                  {USDollar.format(item.price)}
+                </td>
               </tr>
             ))}
           </tbody>
-          <tfoot className="border-t border-black">
+          <tfoot>
             <tr>
-              <td colSpan="2" className="font-semibold">
+              <td colSpan="2" className="pt-2 font-semibold">
                 Total
               </td>
-              <td>{USDollar.format(totalPrice)}</td>
+              <td className="pt-2 font-semibold text-green-500">
+                {USDollar.format(totalPrice)}
+              </td>
             </tr>
           </tfoot>
         </table>

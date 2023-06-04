@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "@/reducers/productsSlice";
+import { fetchProducts } from "@/reducers/productReducer";
 
 // components
 import Product from "@/components/Product";

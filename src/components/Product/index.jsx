@@ -1,28 +1,48 @@
-import { useState } from "react";
 import { USDollar } from "@/utils/index";
-import { useDispatch } from "react-redux";
-import { buyProduct, sellProduct } from "@/reducers/billSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { buyProduct, sellProduct } from "@/reducers/billReducer";
+import { updateMoney } from "@/reducers/moneyReducer";
+import { updateQuantity } from "@/reducers/productReducer";
 
 const Product = ({ product }) => {
-  const [count, setCount] = useState(0);
+  const { money } = useSelector((state) => state.money);
   const dispatch = useDispatch();
 
   const handleBuy = async () => {
-    setCount((count) => count + 1);
+    dispatch(updateQuantity({ id: product.id, type: "buy" }));
+
+    dispatch(
+      updateMoney({
+        type: "buy",
+        price: product.price,
+      })
+    );
+
     dispatch(
       buyProduct({
-        id: product.id,
-        name: product.title,
-        price: product.price * (count + 1),
-        quantity: count + 1,
+        ...product,
+        price: product.price * (product.quantity + 1),
+        quantity: product.quantity + 1,
       })
     );
   };
 
   const handleSell = () => {
-    setCount((count) => count - 1);
+    dispatch(updateQuantity({ id: product.id, type: "sell" }));
+
     dispatch(
-      sellProduct({ id: product.id, price: product.price * (count - 1) })
+      updateMoney({
+        type: "sell",
+        price: product.price,
+      })
+    );
+
+    dispatch(
+      sellProduct({
+        ...product,
+        price: product.price * (product.quantity - 1),
+        quantity: product.quantity - 1,
+      })
     );
   };
 
@@ -45,8 +65,8 @@ const Product = ({ product }) => {
       </div>
       <div className="mt-auto w-full flex justify-between gap-2">
         <button
-          className="w-full h-10 font-semibold text-center text-white bg-red-500  rounded-sm disabled:bg-slate-100 disabled:text-black"
-          disabled={count == 0 ? true : false}
+          className="w-full h-10 font-semibold text-center text-white bg-red-500  rounded-sm disabled:bg-slate-100 disabled:text-black disabled:cursor-not-allowed"
+          disabled={product.quantity == 0 ? true : false}
           onClick={handleSell}
         >
           Sell
@@ -54,12 +74,13 @@ const Product = ({ product }) => {
         <input
           className="w-full h-10 font-semibold text-center border border-gray-300 rounded-sm"
           type="text"
-          value={count}
+          value={product.quantity}
           readOnly
         />
         <button
-          className="w-full h-10 font-semibold bg-green-500 text-white rounded-sm"
+          className="w-full h-10 font-semibold bg-green-500 text-white rounded-sm disabled:bg-slate-100 disabled:text-black disabled:cursor-not-allowed"
           onClick={handleBuy}
+          disabled={money < product.price ? true : false}
         >
           Buy
         </button>

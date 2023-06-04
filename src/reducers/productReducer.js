@@ -22,13 +22,28 @@ const productsSlice = createSlice({
     status: "idle",
     error: null,
   },
+  reducers: {
+    updateQuantity: (state, action) => {
+      const { id, type } = action.payload;
+
+      const product = state.products.find((product) => product.id === id);
+
+      if (type === "buy") {
+        product.quantity++;
+      } else if (type === "sell") {
+        product.quantity--;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
       state.status = "loading";
     }),
       builder.addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.products = state.products.concat(action.payload);
+        state.products = action.payload.map((product) => {
+          return { ...product, quantity: 0 };
+        });
       }),
       builder.addCase(fetchProducts.rejected, (state, action) => {
         state.status = "failed";
@@ -36,5 +51,7 @@ const productsSlice = createSlice({
       });
   },
 });
+
+export const { updateQuantity } = productsSlice.actions;
 
 export default productsSlice.reducer;

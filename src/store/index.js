@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import moneyReducer from "@/reducers/moneySlice";
-import productsReducer from "@/reducers/productsSlice";
-import billReducer from "@/reducers/billSlice";
+import moneyReducer from "@/reducers/moneyReducer";
+import productsReducer from "@/reducers/productReducer";
+import billReducer from "@/reducers/billReducer";
 
 const store = configureStore({
   reducer: {
