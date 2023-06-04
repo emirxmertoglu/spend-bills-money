@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import MoneyBar from "@/components/MoneyBar";
 import Products from "@/components/Products";
+import Bill from "@/components/Bill";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
           <Header />
           <MoneyBar />
           <Products />
+          <Bill />
         </div>
       </div>
     </div>
