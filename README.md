@@ -8,7 +8,7 @@ I tried to make a clean software architecture and responsive web design also the
 - React,
 - Redux Toolkit,
 - Axios,
-- Fake Store API
-- Tailwind CSS,
+- Fake Store API,
+- Tailwind CSS
 
 ### You can check the live version of the project [here](https://spend-bills-money.vercel.app/).
